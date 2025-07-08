@@ -1,0 +1,1582 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f7f7f7;
+
+}
+
+header nav{
+    color: white;
+    background-color:#6a040f;
+    padding-bottom: 15px;
+}
+
+header nav img{
+    display: inline-block;
+    margin: 10px 0 0 10px;
+}
+
+header nav h1{
+    margin-top: -83px;
+    margin-left: 100px;
+}
+
+header nav h3{
+    margin-left: 100px;
+    margin-top: -15px;
+    font-weight: lighter;
+}
+
+header nav #p{
+    margin-bottom: 0px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    padding: 20px;
+}
+
+.login-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+    float: left;
+    margin-top: -5px;
+    margin-left: -5px;
+}
+
+.logo-container p {
+    color: #333;
+    margin: 0;
+    padding-top: 5px;
+    text-align: left;
+    margin-right: 100px;
+    font-size: 1.1em;
+}
+
+h2 {
+    color: #FF8C00;
+    font-size: 1.8em;
+    text-align: left;
+    margin: 20px 0 5px 5px;
+    font-weight: normal;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 1em;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #FF8C00;
+}
+
+.forgot-password {
+    text-align: right;
+    margin: -8px 5px 20px;
+}
+
+.forgot-password a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.forgot-password a:hover {
+    color: #FF8C00;
+}
+
+.login-btn {
+    background-color: #6a040f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 40%;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #FF8C00;
+    color: #6a040f;
+}
+
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 220px;
+    background-color: #6a040f;
+    color: white;
+    padding: 20px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.sidebar .logo img {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.nav-links {
+    list-style: none;
+    padding-left: 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-links li {
+    padding: 10px 20px;
+    margin-bottom: 5px;
+}
+
+.nav-links li.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li a i {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.sign-out {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.greeting{
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+}
+.greeting h1 {
+    font-size: 28px;
+    margin: 0;
+    color: #333;
+}
+
+.greeting h2 {
+    font-size: 28px;
+    color: #6a040f;
+    margin-top: 5px;
+    margin-left: 0;
+}
+
+.monthly-sessions h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.sessions-list {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.session-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.session-time {
+    min-width: 100px;
+    text-align: center;
+}
+
+.session-time .date {
+    display: block;
+    font-weight: bold;
+    color: #333;
+}
+
+.session-time .time {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.session-info {
+    width: 100%;
+    background-color: #FFB84C;
+    border-radius: 50px;
+    padding: 5px 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.session-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.student-details {
+    flex: 1;
+}
+
+.student-details h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.student-details p {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Right Sidebar Styles */
+.right-sidebar {
+    width: 250px;
+    padding: 30px 20px;
+    background-color: #FFB84C;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.counselor-profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.counselor-profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.counselor-profile h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.counselor-profile p {
+    color: #333;
+}
+
+.stats-card {
+    width: 50%;
+    margin: 70px auto;
+    background-color: #6a040f;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stats-card h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stats-card p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Search Section Styles */
+.search-section {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.back-button a {
+    color: #333;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.search-container {
+    flex: 1;
+}
+
+.search-box {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-box input {
+    width: 90%;
+    padding: 12px 40px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.filters select {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    background-color: white;
+}
+
+.search-btn {
+    background-color: #FFB84C;
+    color: #333;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #ffa726;
+}
+
+/* Students Grid Styles */
+.students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.student-card {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+.student-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.student-card h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.student-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+/* Student Detail Page Styles */
+.student-detail-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.student-info-card {
+    flex: 2;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.student-info-card .student-profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: auto;
+}
+
+.student-info {
+    flex: 1;
+    margin: auto;
+}
+
+.student-info h2 {
+    color: #ffa41b;
+    font-size: 24px;
+    margin-bottom: 15px;
+    margin-left: 0;
+    font-weight: bolder;
+}
+
+.student-info p {
+    color: #666;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.mood-card {
+    flex: 1;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.mood-card h3 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.mood-emoji {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.mood-log-btn {
+    background-color: #6a040f;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.mood-log-btn:hover {
+    background-color: #8b0614;
+}
+
+/* Sessions Section Styles */
+.sessions-section {
+    margin-top: 30px;
+}
+
+.sessions-section h2 {
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.session-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.session-card {
+    background-color: #ffb444;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.session-date {
+    text-align: center;
+    min-width: 60px;
+}
+
+.session-date .month {
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+.session-date .day {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.session-details {
+    flex: 1;
+    margin: auto;
+}
+
+.session-details h3 {
+    color: #000000;
+    margin-bottom: 5px;
+    margin: auto;
+}
+
+.session-details p {
+    color: #666;
+    margin: 0;
+}
+
+.session-status {
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.session-status.resolved {
+    color: #2e7d32;
+}
+
+.session-status.cancelled {
+    color: #c62828;
+}
+
+.session-link a {
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.session-link a:hover {
+    color: #6a040f;
+}
+
+/* Session Detail Styles */
+.session-detail-section {
+    margin-top: 30px;
+    background-color: #ffb444;
+    border-radius: 10px;
+    padding: 25px;
+    height: 45%;
+}
+
+.session-detail-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-content h2 {
+    color: #000000;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin: auto;
+}
+
+.header-content p {
+    color: #333;
+    margin: 5px 0;
+}
+
+.minimize-btn {
+    padding: 5px;
+}
+
+.minimize-btn a {
+    color: #333;
+    font-size: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.minimize-btn a:hover {
+    color: #6a040f;
+}
+
+.session-feedback-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    gap: 20px;
+}
+
+.feedback-box,
+.notes-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 20px 20px;
+}
+
+.feedback-box h3,
+.notes-box h3 {
+    color: #666;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    margin: auto;
+    font-style: italic;
+}
+
+.feedback-content,
+.notes-content {
+    min-height: 115px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.feedback-content:focus,
+.notes-content:focus {
+    outline: none;
+    border-color: #ffb444;
+}
+
+/* Messages Page Styles */
+.messages-list {
+    width: 300px;
+    background-color: #fff;
+    margin: 20px 0 20px 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.messages-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    
+}
+
+.messages-header h2 {
+    color:#6a040f;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.search-messages input {
+    margin: auto;
+    width: 91%;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+}
+
+.chat-list {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+}
+
+.chat-item {
+    display: flex;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-item:hover {
+    background-color: #f8f8f8;
+}
+
+.chat-item.active {
+    background-color: #f0f0f0;
+}
+
+.chat-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.chat-info {
+    flex: 1;
+    position: relative;
+}
+
+.chat-info h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.chat-info p {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.chat-info .time {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Chat Container Styles */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+.chat-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.chat-user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat-user-info h3 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+    flex: 1;
+}
+
+.video-call-btn {
+    background: none;
+    border: none;
+    color: #6a040f;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.message-row {
+    display: flex;
+    width: 100%;
+}
+
+.message {
+    max-width: 60%;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.message.received {
+    margin-right: auto;
+}
+
+.message.sent {
+    margin-left: auto;
+    flex-direction: row;
+}
+
+.message-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
+}
+.message-avatar-counsel {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.message-content {
+    padding: 10px 15px;
+    border-radius: 15px;
+}
+
+.message.received .message-content {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-top-left-radius: 5px;
+}
+
+.message.sent .message-content {
+    background-color: #6a040f;
+    color: white;
+    border-top-right-radius: 5px;
+}
+
+.message-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.chat-input {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+
+.chat-input .send-btn {
+    background: none;
+    border: none;
+    color: #6a040f;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.chat-input .send-btn:hover {
+    color: #FF8C00;
+}
+
+/* Calendar Styles */
+.calendar-container {
+    flex: 1;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: calc(100vh - 40px);
+}
+
+.calendar-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.create-btn {
+    background-color: #6a040f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.create-btn:hover {
+    background-color: #8b0614;
+}
+
+.today-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.today-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.month-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #666;
+}
+
+.nav-btn:hover {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+}
+
+.month-nav h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.view-select {
+    padding: 8px 16px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Calendar Grid Styles */
+.calendar-grid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    min-height: 0;
+}
+
+.days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+}
+
+.day-name {
+    font-size: 12px;
+    color: #666;
+    padding: 5px;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    flex: 1;
+    gap: 1px;
+    background-color: #eee;
+    min-height: 0;
+}
+
+.calendar-cell {
+    background-color: white;
+    padding: 6px;
+    font-size: 14px;
+    color: #333;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.calendar-cell:hover {
+    background-color: #f8f8f8;
+}
+
+.prev-month,
+.next-month {
+    color: #999;
+}
+
+.has-event {
+    background-color: #fff;
+}
+
+.event {
+    background-color: #6a040f;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.event-time {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.event-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Notifications Styles */
+.notifications-container {
+    flex: 1;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.notifications-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.notifications-header h2 {
+    color: #6a040f;
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.notifications-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.notification-item:hover {
+    background-color: #f0f0f0;
+}
+
+.notification-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.notification-icon i {
+    font-size: 18px;
+    color: #6a040f;
+}
+
+.notification-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #6a040f;
+}
+
+/* Notification Types */
+.notification-item.urgent {
+    background-color: #fff2f2;
+    border-left: 4px solid #ff4444;
+}
+
+.notification-item.urgent .notification-icon i {
+    color: #ff4444;
+}
+
+.notification-item.upcoming {
+    background-color: #f2f8ff;
+    border-left: 4px solid #6a040f;
+}
+
+.notification-item.confirmed {
+    background-color: #f2f8ff;
+    border-left: 4px solid #6a040f;
+}
+
+.notification-item.message {
+    background-color: #f8f8f8;
+    border-left: 4px solid #6a040f;
+}
+
+.notification-item.feedback {
+    background-color: #f8f8f8;
+    border-left: 4px solid #6a040f;
+}
+
+/* Session History Styles */
+.history-container {
+    flex: 1;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.history-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.month-navigation h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #666;
+}
+
+.nav-btn:hover {
+    color: #6a040f;
+}
+
+.session-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.session-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.session-item:hover {
+    background-color: #f0f0f0;
+}
+
+.session-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.session-details {
+    flex: 1;
+}
+
+.session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.session-header h3 {
+    margin: 0;
+    color: #FFB84C;
+    font-size: 16px;
+}
+
+.session-date {
+    color: #666;
+    font-size: 14px;
+}
+
+.session-status {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.session-status.resolved {
+    color: #2e7d32;
+}
+
+.session-status.cancelled {
+    color: #c62828;
+}
+
+.session-feedback {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.session-feedback p {
+    margin: 0;
+    font-style: italic;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1366px) {
+    header nav h1 {
+        font-size: 1.5em;
+    }
+
+    header nav h3 {
+        font-size: 1em;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .logo-container img {
+        width: 50px;
+    }
+
+    .container {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        flex: 1;
+    }
+
+    .right-sidebar {
+        width: 220px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .nav-links li {
+        margin: 0;
+    }
+
+    .main-content {
+        width: calc(100% - 40px);
+        margin: 20px;
+    }
+
+    .right-sidebar {
+        width: calc(100% - 40px);
+        margin: 0 20px 20px 20px;
+        border-radius: 20px;
+    }
+
+    .counselor-profile {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .stats-card {
+        width: 200px;
+        margin: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header nav h1 {
+        font-size: 1.2em;
+        margin-left: 70px;
+    }
+
+    header nav h3 {
+        font-size: 0.9em;
+        margin-left: 70px;
+    }
+
+    header nav img {
+        width: 50px;
+        margin: 5px 0 0 5px;
+    }
+
+    .nav-links {
+        padding: 0 10px;
+    }
+
+    .nav-links li {
+        padding: 8px 15px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .student-detail-container {
+        flex-direction: column;
+    }
+
+    .student-info-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .session-feedback-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-card {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .logo-container img {
+        width: 40px;
+    }
+
+    .logo-container p {
+        font-size: 0.9em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .input-group input {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .login-btn {
+        width: 60%;
+        padding: 8px 30px;
+    }
+
+    .student-card {
+        padding: 15px;
+    }
+
+    .student-card img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .chat-messages {
+        padding: 10px;
+    }
+
+    .message {
+        max-width: 80%;
+    }
+
+    .message-content {
+        padding: 8px 12px;
+    }
+
+    .chat-input {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    header nav h1 {
+        font-size: 1em;
+        margin-left: 60px;
+    }
+
+    header nav h3 {
+        font-size: 0.8em;
+        margin-left: 60px;
+    }
+
+    header nav img {
+        width: 40px;
+        margin: 5px 0 0 5px;
+    }
+
+    .login-card {
+        padding: 10px;
+    }
+
+    .logo-container p {
+        font-size: 0.8em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    .input-group input {
+        padding: 6px;
+        font-size: 0.8em;
+    }
+
+    .login-btn {
+        width: 80%;
+        padding: 8px 20px;
+        font-size: 0.9em;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .message-content {
+        padding: 6px 10px;
+    }
+
+    .message-content p {
+        font-size: 12px;
+    }
+}

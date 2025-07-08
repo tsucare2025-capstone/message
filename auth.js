@@ -80,7 +80,8 @@ router.post('/login', (req, res) => {
                         user: {
                             id: user.id,
                             name: user.name,
-                            email: user.email
+                            email: user.email,
+                            is_verified: user.is_verified
                         }
                     });
                 } else {

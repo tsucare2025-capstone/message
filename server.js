@@ -1,5 +1,6 @@
 const express = require('express');
 const authRoutes = require('./auth');
+const cors = require('cors');
 
 
 
@@ -10,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/* CORS
+// CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -21,7 +22,6 @@ app.use((req, res, next) => {
         next();
     }
 });
-*/
 
 // Routes
 app.use('/auth', authRoutes);

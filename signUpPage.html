@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sign Up</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo.png" width="80vh">
+            <h1>Tarlac State University</h1>
+            <h3>Digital Counseling Platform</h3>
+            <h3 id="p">Counselor Portal</h3>
+        </nav>
+    </header>
+    <main>
+        <div class="login-card">
+            <div class="logo-container">
+                <img src="logo-counsel.png" alt="TSU Guidance and Counseling Unit Logo">
+                <p>TSU Guidance and Counseling Unit</p>
+            </div>
+            <h2>Create Account</h2>
+            <form id="signupForm">
+                <div class="input-group">
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit" class="login-btn" id="signupBtn">Sign up</button>
+                <div id="signupMessage" style="margin-top:10px;color:#b00;font-size:0.95em;"></div>
+            </form>
+            <div style="margin-top: 10px; font-size: 0.95em;">
+                Already have an account? <a href="loginPage.html">Log in</a>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html> 
