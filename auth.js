@@ -22,7 +22,7 @@ router.post('/register', validateRegistration, async (req, res) => {
 
     try{
         // Check if user already exists
-        const checkQuery = 'SELECT * FROM users WHERE email = ?';
+        const checkQuery = 'SELECT * FROM counselor WHERE email = ?';
         db.query(checkQuery, [email], async (err, results) => {
             if (err) {
                 console.error('Database error:', err);
@@ -37,7 +37,7 @@ router.post('/register', validateRegistration, async (req, res) => {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             //insert the user into the database
-            const insertQuery = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
+            const insertQuery = 'INSERT INTO counselor (name, email, password) VALUES (?, ?, ?)';
             db.query(insertQuery, [name, email, hashedPassword], (err, results) => {
                 if (err) {
                     console.error('Database error:', err);
@@ -60,7 +60,7 @@ router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
     //check if the user exists by email
-    const query = 'SELECT * FROM users WHERE email = ?';
+    const query = 'SELECT * FROM counselor WHERE email = ?';
     db.query(query, [email], async (err, results) => {
         if (err) {
             console.error('Database error:', err);
@@ -127,7 +127,7 @@ async function sendOTP(emailId, otp) {
 router.post('/request-otp', (req, res) => {
     const { email } = req.body;
     if (!email) return res.status(400).json({ error: 'Email required' });
-    const query = 'SELECT * FROM users WHERE email = ?';
+    const query = 'SELECT * FROM counselor WHERE email = ?';
     db.query(query, [email], async (err, results) => {
         if (err) return res.status(500).json({ error: 'Database error' });
         if (results.length === 0) return res.status(404).json({ error: 'User not found' });
@@ -135,7 +135,7 @@ router.post('/request-otp', (req, res) => {
         if (user.is_verified) return res.status(400).json({ error: 'User already verified' });
         const otp = generateOTP();
         const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 min expiry
-        const updateQuery = 'UPDATE users SET otp = ?, otp_expiry = ? WHERE email = ?';
+        const updateQuery = 'UPDATE counselor SET otp = ?, otp_expiry = ? WHERE email = ?';
         db.query(updateQuery, [otp, expiry, email], async (err) => {
             if (err) return res.status(500).json({ error: 'Failed to store OTP' });
             try {
@@ -152,7 +152,7 @@ router.post('/request-otp', (req, res) => {
 router.post('/verify-otp', (req, res) => {
     const { email, otp } = req.body;
     if (!email || !otp) return res.status(400).json({ error: 'Email and OTP required' });
-    const query = 'SELECT * FROM users WHERE email = ?';
+    const query = 'SELECT * FROM counselor WHERE email = ?';
     db.query(query, [email], (err, results) => {
         if (err) return res.status(500).json({ error: 'Database error' });
         if (results.length === 0) return res.status(404).json({ error: 'User not found' });
@@ -162,7 +162,7 @@ router.post('/verify-otp', (req, res) => {
         if (user.otp !== otp) return res.status(401).json({ error: 'Invalid OTP' });
         if (new Date() > new Date(user.otp_expiry)) return res.status(401).json({ error: 'OTP expired' });
         // Mark user as verified, clear OTP
-        const updateQuery = 'UPDATE users SET is_verified = 1, otp = NULL, otp_expiry = NULL WHERE email = ?';
+        const updateQuery = 'UPDATE counselor SET is_verified = 1, otp = NULL, otp_expiry = NULL WHERE email = ?';
         db.query(updateQuery, [email], (err) => {
             if (err) return res.status(500).json({ error: 'Failed to verify user' });
             res.json({ message: 'User verified successfully' });

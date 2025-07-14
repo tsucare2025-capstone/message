@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Messages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="TSU Logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-th-large"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a href="studentProfiles.html"><i class="fas fa-user-graduate"></i>Student Profiles</a>
+                </li>
+                <li class="active">
+                    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
+                </li>
+                <li>
+                    <a href="calendar.html"><i class="fas fa-calendar"></i>Calendar</a>
+                </li>
+                <li>
+                    <a href="notifications.html"><i class="fas fa-bell"></i>Notifications</a>
+                </li>
+                <li>
+                    <a href="sessionHistory.html"><i class="fas fa-history"></i>Session History</a>
+                </li>
+                <li class="sign-out">
+                    <a href="loginPage.html"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Messages List Section -->
+        <div class="messages-list">
+            <div class="messages-header">
+                <h2>MESSAGES</h2>
+                <div class="search-messages">
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+            <div class="chat-list">
+                <div class="chat-item active">
+                    <img src="user-stud.png" alt="Student 1">
+                    <div class="chat-info">
+                        <h3>Student 1</h3>
+                        <p>You: Sure, I can help you with that.</p>
+                        <span class="time">11:02</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="user-stud.png" alt="Student 2">
+                    <div class="chat-info">
+                        <h3>Student 2</h3>
+                        <p>Sent an attachment.</p>
+                        <span class="time">Sat</span>
+                    </div>
+                </div>
+                <div class="chat-item">
+                    <img src="user-stud.png" alt="Student 3">
+                    <div class="chat-info">
+                        <h3>Student 3</h3>
+                        <p>You: Okay, thank you.</p>
+                        <span class="time">1d</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container Section -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <img src="user-stud.png" alt="Student 3">
+                    <h3>Student 1</h3>
+                    <button class="video-call-btn">
+                        <i class="fas fa-video"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="chat-messages">
+                <!-- Messages will be displayed here -->
+                <div class="message-row">
+                    <div class="message received">
+                        <img src="user-stud.png" alt="Student 3" class="message-avatar">
+                        <div class="message-content">
+                            <p>Hello, good morning.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="message-row">
+                    <div class="message sent">
+                        <div class="message-content">
+                            <p>Good morning! How can I help you today?</p>
+                        </div>
+                        <img src="counsel-prof.png" alt="Counselor" class="message-avatar-counsel">
+                    </div>
+                </div>
+                <div class="message-row">
+                    <div class="message received">
+                        <img src="user-stud.png" alt="Student 3" class="message-avatar">
+                        <div class="message-content">
+                            <p>I would like to schedule a counseling session.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="message-row">
+                    <div class="message sent">
+                        <div class="message-content">
+                            <p>Sure, I can help you with that.</p>
+                        </div>
+                        <img src="counsel-prof.png" alt="Counselor" class="message-avatar-counsel">
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Aa">
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

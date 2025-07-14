@@ -1,6 +1,8 @@
 const express = require('express');
 const authRoutes = require('./auth');
 const cors = require('cors');
+const studentRoutes = require('./students');
+
 
 
 
@@ -25,6 +27,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/students', studentRoutes);
 
 
 // 404 handler

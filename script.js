@@ -181,3 +181,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+// Student Profiles Search and Display Logic
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Only run this code on studentProfiles.html
+    if (!document.querySelector('.students-grid')) return;
+
+    const searchBtn = document.querySelector('.search-btn');
+    const searchInput = document.querySelector('.search-box input');
+    const genderSelect = document.querySelector('.filters select:nth-child(1)');
+    const collegeSelect = document.querySelector('.filters select:nth-child(2)');
+    const studentsGrid = document.querySelector('.students-grid');
+
+    async function fetchStudents() {
+        const gender = genderSelect.value;
+        const college = collegeSelect.value;
+        const search = searchInput.value.trim();
+        let url = `http://localhost:3000/students?`;
+        if (gender) url += `gender=${encodeURIComponent(gender)}&`;
+        if (college) url += `college=${encodeURIComponent(college)}&`;
+        if (search) url += `search=${encodeURIComponent(search)}&`;
+
+        try {
+            const res = await fetch(url);
+            const students = await res.json();
+            studentsGrid.innerHTML = '';
+            if (students.length === 0) {
+                studentsGrid.innerHTML = '<p style="text-align:center;width:100%">No students found.</p>';
+                return;
+            }
+            students.forEach(student => {
+                const card = document.createElement('a');
+                card.className = 'student-card';
+                card.href = 'studentDetail.html?id=' + student.id;
+                card.innerHTML = `
+                    <img src="user-stud.png" alt="Student">
+                    <h3>${student.name}</h3>
+                    <p>${student.program || ''}</p>
+                `;
+                studentsGrid.appendChild(card);
+            });
+        } catch (err) {
+            studentsGrid.innerHTML = '<p style="color:red;text-align:center;width:100%">Failed to load students.</p>';
+        }
+    }
+
+    searchBtn.addEventListener('click', fetchStudents);
+    genderSelect.addEventListener('change', fetchStudents);
+    collegeSelect.addEventListener('change', fetchStudents);
+    // Optionally, fetch on Enter in search
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            // Reset dropdowns to default
+            genderSelect.selectedIndex = 0;
+            collegeSelect.selectedIndex = 0;
+            // Fetch students using only the search bar value
+            fetchStudents();
+        }
+    });
+    // Initial load
+    fetchStudents();
+});

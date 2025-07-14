@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Session History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="TSU Logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-th-large"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a href="studentProfiles.html"><i class="fas fa-user-graduate"></i>Student Profiles</a>
+                </li>
+                <li>
+                    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
+                </li>
+                <li>
+                    <a href="calendar.html"><i class="fas fa-calendar"></i>Calendar</a>
+                </li>
+                <li>
+                    <a href="notifications.html"><i class="fas fa-bell"></i>Notifications</a>
+                </li>
+                <li class="active">
+                    <a href="sessionHistory.html"><i class="fas fa-history"></i>Session History</a>
+                </li>
+                <li class="sign-out">
+                    <a href="loginPage.html"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Session History Container -->
+        <div class="history-container">
+            <div class="history-header">
+                <div class="month-navigation">
+                    <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <h2>March 2025</h2>
+                    <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="session-list">
+                <!-- Session Item -->
+                <div class="session-item">
+                    <div class="session-profile">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="session-details">
+                        <div class="session-header">
+                            <h3>Student</h3>
+                            <span class="session-date">03 March</span>
+                        </div>
+                        <div class="session-status resolved">Resolved</div>
+                        <div class="session-feedback">
+                            <p>"I truly appreciate the support I received. The counselor was very understanding..."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session Item -->
+                <div class="session-item">
+                    <div class="session-profile">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="session-details">
+                        <div class="session-header">
+                            <h3>Student</h3>
+                            <span class="session-date">11 March</span>
+                        </div>
+                        <div class="session-status resolved">Resolved</div>
+                        <div class="session-feedback">
+                            <p>"Talking to my counselor felt like a safe space where I could be honest about..."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session Item -->
+                <div class="session-item">
+                    <div class="session-profile">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="session-details">
+                        <div class="session-header">
+                            <h3>Student</h3>
+                            <span class="session-date">18 March</span>
+                        </div>
+                        <div class="session-status resolved">Resolved</div>
+                        <div class="session-feedback">
+                            <p>No feedback yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session Item -->
+                <div class="session-item">
+                    <div class="session-profile">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="session-details">
+                        <div class="session-header">
+                            <h3>Student</h3>
+                            <span class="session-date">20 March</span>
+                        </div>
+                        <div class="session-status resolved">Resolved</div>
+                        <div class="session-feedback">
+                            <p>"This has been one of the best counseling experiences I've had. My counselor..."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session Item -->
+                <div class="session-item">
+                    <div class="session-profile">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="session-details">
+                        <div class="session-header">
+                            <h3>Student</h3>
+                            <span class="session-date">23 March</span>
+                        </div>
+                        <div class="session-status cancelled">Cancelled</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

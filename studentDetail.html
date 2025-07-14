@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="TSU Logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-th-large"></i>Dashboard</a>
+                </li>
+                <li class="active">
+                    <a href="studentProfiles.html"><i class="fas fa-user-graduate"></i>Student Profiles</a>
+                </li>
+                <li>
+                    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
+                </li>
+                <li>
+                    <a href="calendar.html"><i class="fas fa-calendar"></i>Calendar</a>
+                </li>
+                <li>
+                    <a href="notifications.html"><i class="fas fa-bell"></i>Notifications</a>
+                </li>
+                <li>
+                    <a href="sessionHistory.html"><i class="fas fa-history"></i>Session History</a>
+                </li>
+                <li class="sign-out">
+                    <a href="loginPage.html"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Back Button -->
+            <div class="back-button">
+                <a href="studentProfiles.html"><i class="fas fa-arrow-left"></i></a>
+            </div>
+
+            <!-- Student Info and Mood Section -->
+            <div class="student-detail-container">
+                <div class="student-info-card">
+                    <img src="user-stud.png" alt="Student Profile" class="student-profile-img">
+                    <div class="student-info">
+                        <h2>Student</h2>
+                        <p>Program</p>
+                        <p>Student Number</p>
+                        <p>Gender</p>
+                    </div>
+                </div>
+
+                <div class="mood-card">
+                    <h3>Mood for today</h3>
+                    <img src="happiness.png" alt="Happy Mood" class="mood-emoji">
+                    <button class="mood-log-btn">View Mood Log</button>
+                </div>
+            </div>
+
+            <!-- Sessions Section -->
+            <div class="sessions-section">
+                <h2>Session</h2>
+                <div class="session-list">
+                    <div class="session-card">
+                        <div class="session-date">
+                            <span class="month">MAY</span>
+                            <span class="day">03</span>
+                        </div>
+                        <div class="session-details">
+                            <h3>First Session</h3>
+                            <p>Campus</p>
+                            <p class="session-status resolved">Resolved</p>
+                        </div>
+                        <div class="session-link">
+                            <a href="sessionDetail.html"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="session-card">
+                        <div class="session-date">
+                            <span class="month">MAY</span>
+                            <span class="day">15</span>
+                        </div>
+                        <div class="session-details">
+                            <h3>Second Session</h3>
+                            <p>Campus</p>
+                            <p class="session-status cancelled">Cancelled</p>
+                        </div>
+                        <div class="session-link">
+                            <a href="sessionDetail.html"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

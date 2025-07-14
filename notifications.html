@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="TSU Logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-th-large"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a href="studentProfiles.html"><i class="fas fa-user-graduate"></i>Student Profiles</a>
+                </li>
+                <li>
+                    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
+                </li>
+                <li>
+                    <a href="calendar.html"><i class="fas fa-calendar"></i>Calendar</a>
+                </li>
+                <li class="active">
+                    <a href="notifications.html"><i class="fas fa-bell"></i>Notifications</a>
+                </li>
+                <li>
+                    <a href="sessionHistory.html"><i class="fas fa-history"></i>Session History</a>
+                </li>
+                <li class="sign-out">
+                    <a href="loginPage.html"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Notifications Container -->
+        <div class="notifications-container">
+            <div class="notifications-header">
+                <h2>NOTIFICATIONS</h2>
+            </div>
+            
+            <div class="notifications-list">
+                <!-- Upcoming Session Notification -->
+                <div class="notification-item upcoming">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p>Your next session with <span class="highlight">Student</span> is in 30 minutes.</p>
+                    </div>
+                </div>
+
+                <!-- Session Confirmation Notification -->
+                <div class="notification-item confirmed">
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p>Your session with <span class="highlight">Student</span> has been confirmed for March 29, 2025 at 3:30 pm.</p>
+                    </div>
+                </div>
+
+                <!-- Urgent Notification -->
+                <div class="notification-item urgent">
+                    <div class="notification-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <p><span class="highlight">Student</span> has reported severe distress. Immediate attention may be needed.</p>
+                    </div>
+                </div>
+
+                <!-- Message Notification -->
+                <div class="notification-item message">
+                    <div class="notification-icon">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="notification-content">
+                        <p><span class="highlight">Student</span> sent you a message. Tap to respond.</p>
+                    </div>
+                </div>
+
+                <!-- Feedback Notification -->
+                <div class="notification-item feedback">
+                    <div class="notification-icon">
+                        <img src="user-stud.png" alt="Student">
+                    </div>
+                    <div class="notification-content">
+                        <p><span class="highlight">Student</span> has submitted feedback on their last session. Tap to review.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

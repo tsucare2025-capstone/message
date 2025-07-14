@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="TSU Logo">
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-th-large"></i>Dashboard</a>
+                </li>
+                <li>
+                    <a href="studentProfiles.html"><i class="fas fa-user-graduate"></i>Student Profiles</a>
+                </li>
+                <li>
+                    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
+                </li>
+                <li class="active">
+                    <a href="calendar.html"><i class="fas fa-calendar"></i>Calendar</a>
+                </li>
+                <li>
+                    <a href="notifications.html"><i class="fas fa-bell"></i>Notifications</a>
+                </li>
+                <li>
+                    <a href="sessionHistory.html"><i class="fas fa-history"></i>Session History</a>
+                </li>
+                <li class="sign-out">
+                    <a href="loginPage.html"><i class="fas fa-sign-out-alt"></i>Sign out</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Calendar Container -->
+        <div class="calendar-container">
+            <!-- Calendar Header -->
+            <div class="calendar-header">
+                <div class="calendar-nav">
+                    <button class="create-btn">
+                        <i class="fas fa-plus"></i>
+                        Create
+                    </button>
+                    <button class="today-btn">Today</button>
+                    <div class="month-nav">
+                        <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                        <h2>March 2025</h2>
+                    </div>
+                </div>
+                <div class="view-options">
+                    <select class="view-select">
+                        <option value="month">Month</option>
+                        <option value="week">Week</option>
+                        <option value="day">Day</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Calendar Grid -->
+            <div class="calendar-grid">
+                <!-- Days Header -->
+                <div class="days-header">
+                    <div class="day-name">Sunday</div>
+                    <div class="day-name">Monday</div>
+                    <div class="day-name">Tuesday</div>
+                    <div class="day-name">Wednesday</div>
+                    <div class="day-name">Thursday</div>
+                    <div class="day-name">Friday</div>
+                    <div class="day-name">Saturday</div>
+                </div>
+
+                <!-- Calendar Cells -->
+                <div class="calendar-body">
+                    <!-- Week 1 -->
+                    <div class="calendar-cell prev-month">23</div>
+                    <div class="calendar-cell prev-month">24</div>
+                    <div class="calendar-cell prev-month">25</div>
+                    <div class="calendar-cell prev-month">26</div>
+                    <div class="calendar-cell prev-month">27</div>
+                    <div class="calendar-cell prev-month">28</div>
+                    <div class="calendar-cell">1</div>
+
+                    <!-- Week 2 -->
+                    <div class="calendar-cell">2</div>
+                    <div class="calendar-cell">3</div>
+                    <div class="calendar-cell">4</div>
+                    <div class="calendar-cell">5</div>
+                    <div class="calendar-cell">6</div>
+                    <div class="calendar-cell">7</div>
+                    <div class="calendar-cell">8</div>
+
+                    <!-- Week 3 -->
+                    <div class="calendar-cell">9</div>
+                    <div class="calendar-cell">10</div>
+                    <div class="calendar-cell">11</div>
+                    <div class="calendar-cell">12</div>
+                    <div class="calendar-cell">13</div>
+                    <div class="calendar-cell">14</div>
+                    <div class="calendar-cell">15</div>
+
+                    <!-- Week 4 -->
+                    <div class="calendar-cell">16</div>
+                    <div class="calendar-cell">17</div>
+                    <div class="calendar-cell">18</div>
+                    <div class="calendar-cell">19</div>
+                    <div class="calendar-cell">20</div>
+                    <div class="calendar-cell">21</div>
+                    <div class="calendar-cell">22</div>
+
+                    <!-- Week 5 -->
+                    <div class="calendar-cell">23</div>
+                    <div class="calendar-cell">24</div>
+                    <div class="calendar-cell">25</div>
+                    <div class="calendar-cell">26</div>
+                    <div class="calendar-cell">27</div>
+                    <div class="calendar-cell">28</div>
+                    <div class="calendar-cell has-event">29
+                        <div class="event">
+                            <span class="event-time">3:30 pm</span>
+                            <span class="event-title">Student 1</span>
+                        </div>
+                    </div>
+
+                    <!-- Week 6 -->
+                    <div class="calendar-cell">30</div>
+                    <div class="calendar-cell">31</div>
+                    <div class="calendar-cell next-month">1</div>
+                    <div class="calendar-cell next-month">2</div>
+                    <div class="calendar-cell next-month">3</div>
+                    <div class="calendar-cell next-month">4</div>
+                    <div class="calendar-cell next-month">5</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
