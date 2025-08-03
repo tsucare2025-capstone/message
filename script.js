@@ -457,6 +457,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             <p style="margin: 0; font-size: 14px;">There are no scheduled sessions for this month.</p>
                         </div>
                     `;
+                    // Set stats-card to zero if no sessions
+                    const statsCard = document.querySelector('.stats-card h2');
+                    const statsDescription = document.querySelector('.stats-card p');
+                    if (statsCard) statsCard.textContent = '0';
+                    if (statsDescription) statsDescription.textContent = 'No patients registered this month';
                     return;
                 }
                 
@@ -488,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Failed to load monthly sessions:', err);
             }
             
-            // Load dashboard stats
+            // Load dashboard stats NA-DOBLE
             try {
                 const res = await fetch(`http://localhost:3000/students/dashboard/stats/${counselorCollege}`);
                 const stats = await res.json();
