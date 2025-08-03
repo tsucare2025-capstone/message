@@ -43,18 +43,18 @@
         <div class="main-content">
             <!-- Back Button -->
             <div class="back-button">
-                <a href="studentDetail.html"><i class="fas fa-arrow-left"></i></a>
+                <a href="studentDetail.html" id="backButton"><i class="fas fa-arrow-left"></i></a>
             </div>
 
             <!-- Student Info and Mood Section -->
             <div class="student-detail-container">
                 <div class="student-info-card">
-                    <img src="user-stud.png" alt="Student Profile" class="student-profile-img">
+                    <img src="user-stud.png" alt="Student Profile" class="student-profile-img" id="studentProfileImg">
                     <div class="student-info">
-                        <h2>Student</h2>
-                        <p>Program</p>
-                        <p>Student Number</p>
-                        <p>Gender</p>
+                        <h2 id="studentName">Student</h2>
+                        <p id="studentProgram">Program</p>
+                        <p id="studentNumber">Student Number</p>
+                        <p id="studentGender">Gender</p>
                     </div>
                 </div>
 
@@ -74,21 +74,21 @@
                         <p>Date</p>
                     </div>
                     <div class="minimize-btn">
-                        <a href="studentDetail.html"><i class="fas fa-external-link-alt"></i></a>
+                        <a href="studentDetail.html" id="externalLink"><i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
 
                 <div class="session-feedback-container">
                     <div class="feedback-box">
                         <h3>Counselee's Feedback</h3>
-                        <div class="feedback-content" contenteditable="true">
+                        <div class="feedback-content" id="feedbackContent">
                             <!-- Feedback content will go here -->
                         </div>
                     </div>
 
                     <div class="notes-box">
                         <h3>Notes</h3>
-                        <div class="notes-content" contenteditable="true">
+                        <div class="notes-content" contenteditable="true" id="notesContent">
                             <!-- Notes content will go here -->
                         </div>
                     </div>
@@ -96,5 +96,6 @@
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html> 

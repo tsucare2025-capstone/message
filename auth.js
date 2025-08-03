@@ -78,9 +78,10 @@ router.post('/login', (req, res) => {
                     res.status(200).json({ 
                         message: 'Login successful',
                         user: {
-                            id: user.id,
+                            counselorID: user.counselorID,  // Change from 'id' to 'counselorID'
                             name: user.name,
                             email: user.email,
+                            assignedCollege: user.assignedCollege,
                             is_verified: user.is_verified
                         }
                     });

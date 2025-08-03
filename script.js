@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = await res.json();
                 if (res.ok) {
                     if (data.user && (data.user.is_verified === 1 || data.user.is_verified === '1')) {
+                        // Save counselor info to localStorage
+                        localStorage.setItem('counselorId', data.user.counselorID);
+                        localStorage.setItem('counselorName', data.user.name);
+                        localStorage.setItem('counselorCollege', data.user.assignedCollege);
                         window.location.href = 'dashboard.html';
                     } else if (data.user && (data.user.is_verified === 0 || data.user.is_verified === '0')) {
                         // Not verified, show OTP UI and request OTP ONCE
@@ -215,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             students.forEach(student => {
                 const card = document.createElement('a');
                 card.className = 'student-card';
-                card.href = 'studentDetail.html?id=' + student.id;
+                card.href = 'studentDetail.html?id=' + student.studentID;
                 card.innerHTML = `
                     <img src="user-stud.png" alt="Student">
                     <h3>${student.name}</h3>
@@ -243,4 +247,270 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     // Initial load
     fetchStudents();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Student Detail Page Logic
+    if (window.location.pathname.endsWith('studentDetail.html')) {
+        (async function() {
+            // Get student ID from URL
+            const params = new URLSearchParams(window.location.search);
+            const studentId = params.get('id');
+            if (!studentId) return;
+            // Fetch student details from backend
+            try {
+                const res = await fetch(`http://localhost:3000/students/${studentId}`);
+                if (!res.ok) throw new Error('Not found');
+                const student = await res.json();
+                document.getElementById('studentName').textContent = student.name || 'N/A';
+                document.getElementById('studentProgram').textContent = student.program || 'N/A';
+                document.getElementById('studentNumber').textContent = student.studentNo || 'N/A';
+                document.getElementById('studentGender').textContent = student.gender || 'N/A';
+                // Optionally update image if you have a field for it
+            } catch (err) {
+                document.getElementById('studentName').textContent = 'Student not found';
+                document.getElementById('studentProgram').textContent = '';
+                document.getElementById('studentNumber').textContent = '';
+                document.getElementById('studentGender').textContent = '';
+            }
+            // Fetch and render sessions for this student
+            try {
+                const res = await fetch(`http://localhost:3000/students/${studentId}/sessions`);
+                const sessions = await res.json();
+                const sessionList = document.querySelector('.session-list');
+                sessionList.innerHTML = '';
+                if (!sessions.length) {
+                    sessionList.innerHTML = '<p style="text-align:center;width:100%">No sessions found.</p>';
+                    return;
+                }
+                sessions.forEach(session => {
+                    const dateObj = new Date(session.sessionDate);
+                    const month = dateObj.toLocaleString('default', { month: 'short' }).toUpperCase();
+                    const day = ('' + dateObj.getDate()).padStart(2, '0');
+                    const statusClass = session.status === 'Resolved' ? 'resolved' : (session.status === 'Cancelled' ? 'cancelled' : '');
+                    const card = document.createElement('div');
+                    card.className = 'session-card';
+                    card.innerHTML = `
+                        <div class="session-date">
+                            <span class="month">${month}</span>
+                            <span class="day">${day}</span>
+                        </div>
+                        <div class="session-details">
+                            <!--<h3>Session</h3>-->
+                            <h3>Session ${session.sessionID}</h3>
+                            <p>${session.campus || ''}</p>
+                            <p class="session-status ${statusClass}">${session.status || ''}</p>
+                        </div>
+                        <div class="session-link">
+                            <a href="sessionDetail.html?id=${session.sessionID}&studentId=${studentId}"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    `;
+                    sessionList.appendChild(card);
+                });
+            } catch (err) {
+                const sessionList = document.querySelector('.session-list');
+                sessionList.innerHTML = '<p style="color:red;text-align:center;width:100%">Failed to load sessions.</p>';
+            }
+        })();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Session Detail Page Logic
+    if (window.location.pathname.endsWith('sessionDetail.html')) {
+        (async function() {
+            // Get session ID and student ID from URL
+            const params = new URLSearchParams(window.location.search);
+            const sessionId = params.get('id');
+            const studentId = params.get('studentId');
+            
+            if (!sessionId || !studentId) return;
+            
+            // Update navigation links to preserve student ID
+            const backButton = document.getElementById('backButton');
+            const externalLink = document.getElementById('externalLink');
+            if (backButton) backButton.href = `studentDetail.html?id=${studentId}`;
+            if (externalLink) externalLink.href = `studentDetail.html?id=${studentId}`;
+            
+            // Fetch and display student info
+            try {
+                const res = await fetch(`http://localhost:3000/students/${studentId}`);
+                if (!res.ok) throw new Error('Student not found');
+                const student = await res.json();
+                document.getElementById('studentName').textContent = student.name || 'N/A';
+                document.getElementById('studentProgram').textContent = student.program || 'N/A';
+                document.getElementById('studentNumber').textContent = student.studentNo || 'N/A';
+                document.getElementById('studentGender').textContent = student.gender || 'N/A';
+            } catch (err) {
+                document.getElementById('studentName').textContent = 'Student not found';
+                document.getElementById('studentProgram').textContent = '';
+                document.getElementById('studentNumber').textContent = '';
+                document.getElementById('studentGender').textContent = '';
+            }
+            
+            // Fetch and display session details
+            try {
+                const res = await fetch(`http://localhost:3000/students/sessions/${sessionId}`);
+                if (!res.ok) throw new Error('Session not found');
+                const session = await res.json();
+                
+                // Update session header
+                const headerContent = document.querySelector('.header-content');
+                if (headerContent) {
+                    const title = headerContent.querySelector('h2');
+                    const campus = headerContent.querySelector('p:nth-child(2)');
+                    const date = headerContent.querySelector('p:nth-child(3)');
+                    
+                    if (title) title.textContent = `Session ${session.sessionID}`;
+                    if (campus) campus.textContent = session.campus || 'Campus';
+                    if (date) {
+                        const sessionDate = new Date(session.sessionDate);
+                        const formattedDate = sessionDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+                        date.textContent = formattedDate;
+                    }
+                }
+                
+                // Update feedback and notes
+                const feedbackContent = document.getElementById('feedbackContent');
+                const notesContent = document.getElementById('notesContent');
+                
+                if (feedbackContent) {
+                    feedbackContent.textContent = session.feedbackComments || 'No feedback available';
+                }
+                if (notesContent) {
+                    notesContent.textContent = session.sessionNotes || '';
+                }
+                
+                // Add auto-save functionality for notes
+                if (notesContent) {
+                    let saveTimeout;
+                    notesContent.addEventListener('input', function() {
+                        clearTimeout(saveTimeout);
+                        saveTimeout = setTimeout(async function() {
+                            try {
+                                const res = await fetch(`http://localhost:3000/students/sessions/${sessionId}`, {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ sessionNotes: notesContent.textContent })
+                                });
+                                if (!res.ok) throw new Error('Failed to save notes');
+                                console.log('Notes saved successfully');
+                            } catch (err) {
+                                console.error('Failed to save notes:', err);
+                            }
+                        }, 1000); // Save after 1 second of no typing
+                    });
+                }
+            } catch (err) {
+                console.error('Failed to load session details:', err);
+            }
+        })();
+    }
+});
+
+// Dashboard Logic
+document.addEventListener('DOMContentLoaded', function() {
+    // Dashboard Page Logic
+    if (window.location.pathname.endsWith('dashboard.html')) {
+        (async function() {
+            const counselorId = localStorage.getItem('counselorId');
+            const counselorName = localStorage.getItem('counselorName');
+            const counselorCollege = localStorage.getItem('counselorCollege');
+            
+            if (!counselorId) {
+                // Redirect to login if not logged in
+                window.location.href = 'loginPage.html';
+                return;
+            }
+            
+            // Update counselor profile
+            try {
+                const res = await fetch(`http://localhost:3000/students/dashboard/counselor/${counselorId}`);
+                if (res.ok) {
+                    const counselor = await res.json();
+                    document.querySelector('.counselor-profile h3').textContent = counselor.name;
+                    if (counselor.counselorImage) {
+                        document.querySelector('.counselor-profile img').src = counselor.counselorImage;
+                    }
+                }
+            } catch (err) {
+                console.error('Failed to load counselor profile:', err);
+            }
+            
+            // Load monthly sessions
+            try {
+                const res = await fetch(`http://localhost:3000/students/dashboard/monthly-sessions/${counselorCollege}`);
+                const sessions = await res.json();
+                
+                const sessionsList = document.querySelector('.sessions-list');
+                sessionsList.innerHTML = '';
+                
+                if (sessions.length === 0) {
+                    sessionsList.innerHTML = `
+                        <div style="text-align: center; padding: 40px 20px; color: #666;">
+                            <i class="fas fa-calendar-times" style="font-size: 48px; margin-bottom: 15px; color: #ccc;"></i>
+                            <h3 style="margin: 0 0 10px 0; color: #333;">No Upcoming Sessions</h3>
+                            <p style="margin: 0; font-size: 14px;">There are no scheduled sessions for this month.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                sessions.forEach(session => {
+                    const dateObj = new Date(session.sessionDate);
+                    const month = dateObj.toLocaleString('default', { month: 'short' }).toUpperCase();
+                    const day = ('' + dateObj.getDate()).padStart(2, '0');
+                    const time = session.sessionTime || session.appointmentTime || '';
+                    
+                    const sessionItem = document.createElement('div');
+                    sessionItem.className = 'session-item';
+                    sessionItem.innerHTML = `
+                        <div class="session-time">
+                            <span class="date">${month} ${day}</span>
+                            <span class="time">${time}</span>
+                        </div>
+                        <div class="session-info">
+                            <img src="user-stud.png" alt="Student">
+                            <div class="student-details">
+                                <h3>${session.studentName}</h3>
+                                <p>Assigned Counselor: ${session.counselorName}</p>
+                                <p>${session.program}</p>
+                            </div>
+                        </div>
+                    `;
+                    sessionsList.appendChild(sessionItem);
+                });
+            } catch (err) {
+                console.error('Failed to load monthly sessions:', err);
+            }
+            
+            // Load dashboard stats
+            try {
+                const res = await fetch(`http://localhost:3000/students/dashboard/stats/${counselorCollege}`);
+                const stats = await res.json();
+                
+                const statsCard = document.querySelector('.stats-card h2');
+                const statsDescription = document.querySelector('.stats-card p');
+                if (statsCard) {
+                    const totalPatients = stats.totalPatients || 0;
+                    statsCard.textContent = totalPatients;
+                    
+                    // Update description based on whether there are patients
+                    if (statsDescription) {
+                        if (totalPatients === 0) {
+                            statsDescription.textContent = 'No patients registered this month';
+                        } else {
+                            statsDescription.textContent = 'Total patients for this month';
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error('Failed to load dashboard stats:', err);
+            }
+        })();
+    }
 });
