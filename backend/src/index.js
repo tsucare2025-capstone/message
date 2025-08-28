@@ -4,14 +4,18 @@ const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/auth.route');
 const messageRoutes = require('./routes/message.route');
+const { app, server, io } = require('./lib/socket');
 const db = require('./lib/db');
-//const cors = require('cors');
+const cors = require('cors')({
+    origin: 'http://localhost:5173',
+    credentials: true,
+});
+
 //const studentRoutes = require('../../students');
 
 
 
 dotenv.config();
-const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware for parsing JSON and URL-encoded data
@@ -22,9 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); // Specific origin instead of *
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', 'true'); // Important for cookies
     if (req.method === 'OPTIONS') {
         res.sendStatus(200);
     } else {
@@ -34,7 +39,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/message', messageRoutes);
+app.use('/api/messages', messageRoutes);
 //app.use('/students', studentRoutes);
 
 
@@ -44,7 +49,7 @@ app.use('/api/message', messageRoutes);
 });*/  
 
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 
 });

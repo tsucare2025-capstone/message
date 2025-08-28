@@ -1,10 +1,11 @@
 const db = require('../lib/db');
+const { socketRecieverSocketId, io } = require('../lib/socket');
 
 const getUsersForSideBar = async (req, res) => {
     try{
         const loggedInUser = req.user;
         // Get all counselors except the logged-in one
-        const query = 'SELECT counselorID, name, email FROM counselor WHERE counselorID != ?';
+        const query = 'SELECT counselorID as _id, name, email FROM counselor WHERE counselorID != ?';
         db.query(query, [loggedInUser.counselorID], (err, results) => {
             if (err) {
                 return res.status(500).json({message: err.message});
@@ -36,30 +37,46 @@ const getMessages = async (req, res) => {
 
 const sendMessage = async (req, res) => {
     try{
-        const {text, image} = req.body;
-        const {userId:studentId} = req.params;
+        const {text} = req.body;
+        const {userId:receiverId} = req.params; // receiverId can be co-counselor or student
         const counselorId = req.user.counselorID;
+        
+        console.log('Send message request:', { text, receiverId, counselorId });
+        
+        if (!text || !receiverId || !counselorId) {
+            return res.status(400).json({message: 'Missing required fields: text, receiverId, or counselorId'});
+        }
        
-        // Insert message with all available attributes
-        const query = 'INSERT INTO messages (counselorID, studentID, text, image, timestamp) VALUES (?, ?, ?, ?, NOW())';
-        db.query(query, [counselorId, studentId, text, image || null], (err, results) => {
+        // Insert message without image column
+        const query = 'INSERT INTO messages (counselorID, studentID, text, timestamp) VALUES (?, ?, ?, NOW())';
+        db.query(query, [counselorId, receiverId, text], (err, results) => {
             if (err) {
+                console.error('Database error:', err);
                 return res.status(500).json({message: err.message});
             }
             
-            // Return the created message with all attributes
+            // Return the created message without image
             const newMessage = {
                 messageID: results.insertId,
                 counselorID: counselorId,
-                studentID: studentId,
+                studentID: receiverId,
                 text: text,
-                image: image || null,
                 timestamp: new Date()
             };
-            
+
+            const receiverSocketId = socketRecieverSocketId(receiverId);
+            console.log('Receiver socket ID:', receiverSocketId);
+
+            if(receiverSocketId){
+                io.to(receiverSocketId).emit('newMessage', newMessage);
+            }else{
+                console.log('Receiver is not online, message saved in database');
+            }
+            console.log('Message sent successfully:', newMessage);
             res.status(201).json(newMessage);
         });
     }catch (error){
+        console.error('Send message error:', error);
         res.status(500).json({message: error.message});
     }
 }

@@ -7,7 +7,7 @@ const {generateToken} = require('../lib/utils');
 const validateRegistration = (req, res, next) => {
     const { name, email, password } = req.body;
 
-    if (password.length < 6) {
+if (password.length < 6) {
         return res.status(400).json({ error: 'Password must be at least 6 characters long' });
     }
 
@@ -50,12 +50,19 @@ const register = async (req, res) => {
                 res.cookie('jwt', token, {
                     httpOnly: true,
                     secure: false,
-                    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+                    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
                 });
                 
                 res.status(201).json({ 
                     message: 'User registered successfully',
-                    userId: results.insertId,
+                    user: {
+                        counselorID: results.insertId,
+                        name: name,
+                        email: email,
+                        assignedCollege: null,
+                        is_verified: 1
+                    },
+                    
                     token
                 });
             });
@@ -66,6 +73,7 @@ const register = async (req, res) => {
     }
 };
 
+//user login
 //user login
 const login = (req, res) => {
     const { email, password } = req.body;
@@ -86,6 +94,16 @@ const login = (req, res) => {
                 const isMatch = await bcrypt.compare(password, user.password);
 
                 if (isMatch) {
+                    // Generate JWT token
+                    const token = generateToken(user.counselorID);
+                    
+                    // Set the cookie
+                    res.cookie('jwt', token, {
+                        httpOnly: true,
+                        secure: false,
+                        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+                    });
+                    
                     res.status(200).json({ 
                         message: 'Login successful',
                         user: {
@@ -184,7 +202,16 @@ const verifyOTP = (req, res) => {
 
 const checkAuth = (req, res) => {
     try{
-        res.status(200).json({user: req.user});
+        // Make sure we're sending the user data correctly
+        res.status(200).json({
+            user: {
+                counselorID: req.user.counselorID,
+                name: req.user.name,
+                email: req.user.email,
+                assignedCollege: req.user.assignedCollege || null,
+                is_verified: req.user.is_verified || 0
+            }
+        });
     }catch(error){
         res.status(500).json({message: error.message});
     }
