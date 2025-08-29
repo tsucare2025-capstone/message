@@ -5,16 +5,19 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
+    target: 'es2020',
+    minify: 'esbuild',
     rollupOptions: {
       external: [],
       output: {
         manualChunks: undefined
       }
-    },
-    target: 'es2020',
-    minify: 'esbuild'
+    }
   },
   optimizeDeps: {
     exclude: ['@vitejs/plugin-react']
+  },
+  esbuild: {
+    target: 'es2020'
   }
 })
