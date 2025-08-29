@@ -112,18 +112,54 @@ app.use((err, req, res, next) => {
 if(process.env.NODE_ENV === 'production'){
     console.log('Running in production mode - serving frontend');
     
-    // Serve static files from frontend dist folder
-    const frontendPath = path.join(__dirname, "..", "..", "frontend", "dist");
-    console.log('Frontend path:', frontendPath);
+    // Try multiple possible paths for frontend dist folder
+    const possiblePaths = [
+        path.join(__dirname, "..", "..", "frontend", "dist"),
+        path.join(__dirname, "..", "frontend", "dist"),
+        path.join(process.cwd(), "frontend", "dist"),
+        path.join(process.cwd(), "..", "frontend", "dist")
+    ];
     
-    app.use(express.static(frontendPath));
+    let frontendPath = null;
+    for (const testPath of possiblePaths) {
+        try {
+            const indexPath = path.join(testPath, "index.html");
+            if (require('fs').existsSync(indexPath)) {
+                frontendPath = testPath;
+                console.log('Found frontend at:', frontendPath);
+                break;
+            }
+        } catch (e) {
+            console.log('Path not accessible:', testPath);
+        }
+    }
     
-    // Serve frontend for all non-API routes (this must come BEFORE the 404 handler)
-    app.get('*', (req, res) => {
-        const indexPath = path.join(frontendPath, "index.html");
-        console.log('Serving index.html from:', indexPath);
-        res.sendFile(indexPath);
-    });
+    if (frontendPath) {
+        console.log('Serving frontend from:', frontendPath);
+        app.use(express.static(frontendPath));
+        
+        // Serve frontend for all non-API routes (this must come BEFORE the 404 handler)
+        app.get('*', (req, res) => {
+            const indexPath = path.join(frontendPath, "index.html");
+            console.log('Serving index.html from:', indexPath);
+            res.sendFile(indexPath);
+        });
+    } else {
+        console.error('Frontend dist folder not found! Tried paths:', possiblePaths);
+        // Fallback: serve a simple message
+        app.get('*', (req, res) => {
+            res.send(`
+                <html>
+                    <body>
+                        <h1>TSUCare Backend Running</h1>
+                        <p>Frontend not found. Check Railway build logs.</p>
+                        <p>Current directory: ${process.cwd()}</p>
+                        <p>Backend directory: ${__dirname}</p>
+                    </body>
+                </html>
+            `);
+        });
+    }
 }
 
 // 404 handler for unmatched routes (only for API routes that don't exist)
