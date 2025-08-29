@@ -65,7 +65,7 @@ app.use('/api/messages', messageRoutes);
 // Root route for testing
 app.get('/', (req, res) => {
     res.json({
-        message: 'TSUCare Backend API is running successfully!',
+        message: 'TSUCare Backend API is running successfully! (Updated)',
         status: 'online',
         database: 'connected',
         timestamp: new Date().toISOString(),
@@ -119,6 +119,7 @@ if(process.env.NODE_ENV === 'production'){
     console.log('Running in production mode - serving frontend');
     
     // Serve static files from frontend dist folder
+
     const frontendPath = path.join(__dirname, "..", "..", "frontend", "dist");
     console.log('Frontend path:', frontendPath);
     
