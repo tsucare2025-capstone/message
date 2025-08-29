@@ -62,10 +62,10 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
-// Root route for testing
-app.get('/', (req, res) => {
+// API health check endpoint
+app.get('/api/health', (req, res) => {
     res.json({
-        message: 'TSUCare Backend API is running successfully! (Updated)',
+        message: 'TSUCare Backend API is running successfully!',
         status: 'online',
         database: 'connected',
         timestamp: new Date().toISOString(),
@@ -75,6 +75,8 @@ app.get('/', (req, res) => {
         }
     });
 });
+
+// Root route will serve the frontend (handled by the catch-all route below)
 
 // Initialize socket server
 const { io, socketRecieverSocketId } = createSocketServer(server);
@@ -106,32 +108,31 @@ app.use((err, req, res, next) => {
     });
 });
 
-// 404 handler for unmatched routes
-app.use('*', (req, res) => {
-    res.status(404).json({ 
-        error: 'Route not found',
-        message: `The route ${req.originalUrl} does not exist`
-    });
-});
-
 // Serve frontend in production
 if(process.env.NODE_ENV === 'production'){
     console.log('Running in production mode - serving frontend');
     
     // Serve static files from frontend dist folder
-
     const frontendPath = path.join(__dirname, "..", "..", "frontend", "dist");
     console.log('Frontend path:', frontendPath);
     
     app.use(express.static(frontendPath));
     
-    // Serve frontend for all non-API routes
+    // Serve frontend for all non-API routes (this must come BEFORE the 404 handler)
     app.get('*', (req, res) => {
         const indexPath = path.join(frontendPath, "index.html");
         console.log('Serving index.html from:', indexPath);
         res.sendFile(indexPath);
     });
 }
+
+// 404 handler for unmatched routes (only for API routes that don't exist)
+app.use('*', (req, res) => {
+    res.status(404).json({ 
+        error: 'Route not found',
+        message: `The route ${req.originalUrl} does not exist`
+    });
+});
 
 // Start server
 server.listen(PORT, () => {
