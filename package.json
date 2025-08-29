@@ -1,23 +1,16 @@
 {
-  "name": "backend",
+  "name": "tsucare",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "backend/src/index.js",
   "scripts": {
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend ",
-    "start": "npm run start --prefix backend"
+    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend",
+    "dev": "npm run dev --prefix backend"
   },
   "keywords": [],
-  "type": "commonjs",
+  "type": "module",
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^17.0.1",
-    "express": "^5.1.0",
-    "mysql2": "^3.14.1",
-    "nodemailer": "^7.0.4",
-    "nodemon": "^3.1.10"
-  }
+  "dependencies": {}
 }
