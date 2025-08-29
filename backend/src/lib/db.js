@@ -14,11 +14,11 @@ console.log('DB_PASSWORD:', process.env.DB_PASSWORD ? '***SET***' : 'NOT SET');
 console.log('=== End Database Debug ===');
 
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
-    port: process.env.DB_PORT,
+    host: 'switchback.proxy.rlwy.net',
+    port: 30275,
+    user: 'root',
+    password: 'NcrzwnjkCMusScrwewAgvYMPptRmBphV',
+    database: 'counseling_platform',
 });
 
 connection.connect((err) => {
