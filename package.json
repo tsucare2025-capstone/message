@@ -3,27 +3,14 @@
   "version": "1.0.0",
   "main": "backend/src/index.js",
   "scripts": {
-    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install --prefix backend",
     "start": "npm run start --prefix backend",
     "dev": "npm run dev --prefix backend"
   },
   "keywords": [],
   "type": "module",
-  "engines": {
-    "node": ">=20.0.0"
-  },
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "express": "^4.21.2",
-    "mysql2": "^3.14.3",
-    "dotenv": "^17.2.1",
-    "cors": "^2.8.5",
-    "cookie-parser": "^1.4.7",
-    "bcrypt": "^6.0.0",
-    "nodemailer": "^7.0.5",
-    "socket.io": "^4.8.1",
-    "jsonwebtoken": "^9.0.2"
-  }
+  "dependencies": {}
 }

@@ -36,7 +36,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://your-frontend-domain.com', 'http://localhost:3000'] 
+        : 'http://localhost:5173',
     credentials: true,
 }));
 
@@ -98,12 +100,9 @@ app.use('*', (req, res) => {
     });
 });
 
+// Frontend is served separately in production
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, "..", "frontend", "dist", "index.html"));
-    });
+    console.log('Running in production mode - frontend should be served separately');
 }
 
 // Start server

@@ -1,15 +1,10 @@
 {
-  "build": {
-    "builder": "nixpacks",
-    "buildCommand": "npm install && npm run build"
-  },
-  "deploy": {
-    "startCommand": "npm start",
-    "restartPolicyType": "ON_FAILURE"
-  },
-  "variables": {
-    "NIXPACKS_NODE_VERSION": "22.12",
-    "NIXPACKS_NPM_CONFIG_PRODUCTION": "false",
-    "NIXPACKS_NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+    "build": {
+      "builder": "nixpacks",
+      "buildCommand": "npm run build"
+    },
+    "deploy": {
+      "startCommand": "npm start",
+      "restartPolicyType": "ON_FAILURE"
+    }
   }
-}
