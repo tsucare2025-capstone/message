@@ -119,11 +119,16 @@ if(process.env.NODE_ENV === 'production'){
     console.log('Running in production mode - serving frontend');
     
     // Serve static files from frontend dist folder
-    app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+    const frontendPath = path.join(__dirname, "..", "..", "frontend", "dist");
+    console.log('Frontend path:', frontendPath);
+    
+    app.use(express.static(frontendPath));
     
     // Serve frontend for all non-API routes
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, "..", "..", "frontend", "dist", "index.html"));
+        const indexPath = path.join(frontendPath, "index.html");
+        console.log('Serving index.html from:', indexPath);
+        res.sendFile(indexPath);
     });
 }
 
