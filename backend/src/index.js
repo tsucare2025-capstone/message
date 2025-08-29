@@ -13,6 +13,13 @@ import cors from 'cors';
 import { setSocketRefs } from './controllers/message.controller.js';
 
 dotenv.config();
+
+// Debug: Log environment and package info
+console.log('=== Environment Debug ===');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('Current working directory:', process.cwd());
+console.log('=== End Debug ===');
+
 const PORT = process.env.PORT || 3000;
 
 const __filename = fileURLToPath(import.meta.url);
