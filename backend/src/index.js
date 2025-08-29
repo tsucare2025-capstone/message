@@ -62,6 +62,20 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
+// Root route for testing
+app.get('/', (req, res) => {
+    res.json({
+        message: 'TSUCare Backend API is running successfully!',
+        status: 'online',
+        database: 'connected',
+        timestamp: new Date().toISOString(),
+        endpoints: {
+            auth: '/api/auth',
+            messages: '/api/messages'
+        }
+    });
+});
+
 // Initialize socket server
 const { io, socketRecieverSocketId } = createSocketServer(server);
 
@@ -100,9 +114,17 @@ app.use('*', (req, res) => {
     });
 });
 
-// Frontend is served separately in production
+// Serve frontend in production
 if(process.env.NODE_ENV === 'production'){
-    console.log('Running in production mode - frontend should be served separately');
+    console.log('Running in production mode - serving frontend');
+    
+    // Serve static files from frontend dist folder
+    app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
+    
+    // Serve frontend for all non-API routes
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, "..", "..", "frontend", "dist", "index.html"));
+    });
 }
 
 // Start server
