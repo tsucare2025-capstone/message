@@ -9,6 +9,9 @@
   },
   "keywords": [],
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
