@@ -62,8 +62,8 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
-// API health check endpoint
-app.get('/api/health', (req, res) => {
+// Root route for testing
+app.get('/', (req, res) => {
     res.json({
         message: 'TSUCare Backend API is running successfully!',
         status: 'online',
@@ -75,8 +75,6 @@ app.get('/api/health', (req, res) => {
         }
     });
 });
-
-// Root route will serve the frontend (handled by the catch-all route below)
 
 // Initialize socket server
 const { io, socketRecieverSocketId } = createSocketServer(server);
@@ -108,67 +106,48 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Serve frontend in production
-if(process.env.NODE_ENV === 'production'){
-    console.log('Running in production mode - serving frontend');
-    
-    // Try multiple possible paths for frontend dist folder
-    const possiblePaths = [
-        path.join(__dirname, "..", "..", "frontend", "dist"),
-        path.join(__dirname, "..", "frontend", "dist"),
-        path.join(process.cwd(), "frontend", "dist"),
-        path.join(process.cwd(), "..", "frontend", "dist")
-    ];
-    
-    let frontendPath = null;
-    for (const testPath of possiblePaths) {
-        try {
-            const indexPath = path.join(testPath, "index.html");
-            if (require('fs').existsSync(indexPath)) {
-                frontendPath = testPath;
-                console.log('Found frontend at:', frontendPath);
-                break;
-            }
-        } catch (e) {
-            console.log('Path not accessible:', testPath);
-        }
-    }
-    
-    if (frontendPath) {
-        console.log('Serving frontend from:', frontendPath);
-        app.use(express.static(frontendPath));
-        
-        // Serve frontend for all non-API routes (this must come BEFORE the 404 handler)
-        app.get('*', (req, res) => {
-            const indexPath = path.join(frontendPath, "index.html");
-            console.log('Serving index.html from:', indexPath);
-            res.sendFile(indexPath);
-        });
-    } else {
-        console.error('Frontend dist folder not found! Tried paths:', possiblePaths);
-        // Fallback: serve a simple message
-        app.get('*', (req, res) => {
-            res.send(`
-                <html>
-                    <body>
-                        <h1>TSUCare Backend Running</h1>
-                        <p>Frontend not found. Check Railway build logs.</p>
-                        <p>Current directory: ${process.cwd()}</p>
-                        <p>Backend directory: ${__dirname}</p>
-                    </body>
-                </html>
-            `);
-        });
-    }
-}
-
-// 404 handler for unmatched routes (only for API routes that don't exist)
+// 404 handler for unmatched routes
 app.use('*', (req, res) => {
     res.status(404).json({ 
         error: 'Route not found',
         message: `The route ${req.originalUrl} does not exist`
     });
 });
+
+// Serve frontend in production
+if(process.env.NODE_ENV === 'production'){
+    console.log('Running in production mode - serving frontend');
+    
+    // Try multiple possible paths for the frontend dist folder
+    const possiblePaths = [
+        path.join(__dirname, "..", "..", "frontend", "dist"),
+        path.join(__dirname, "..", "..", "..", "frontend", "dist"),
+        path.join(process.cwd(), "frontend", "dist"),
+        path.join(process.cwd(), "..", "frontend", "dist")
+    ];
+    
+    console.log('=== Frontend Path Debug ===');
+    possiblePaths.forEach((p, i) => {
+        console.log(`Path ${i}: ${p}`);
+    });
+    console.log('=== End Frontend Path Debug ===');
+    
+    // Use the first path for now (we'll debug the actual structure)
+    const frontendPath = possiblePaths[0];
+    console.log(`Attempting to serve frontend from: ${frontendPath}`);
+    
+    try {
+        app.use(express.static(frontendPath));
+        
+        // Serve frontend for all non-API routes
+        app.get('*', (req, res) => {
+            res.sendFile(path.resolve(frontendPath, "index.html"));
+        });
+        console.log('Frontend static serving configured successfully');
+    } catch (err) {
+        console.log('Error configuring frontend serving:', err.message);
+    }
+}
 
 // Start server
 server.listen(PORT, () => {
