@@ -37,6 +37,38 @@ app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 //app.use('/students', studentRoutes);
 
+// Error handling middleware for route parsing errors
+app.use((err, req, res, next) => {
+    if (err.message && err.message.includes('path-to-regexp')) {
+        console.error('Route parsing error:', err);
+        return res.status(400).json({ 
+            error: 'Invalid route format',
+            message: 'The requested route contains invalid parameters'
+        });
+    }
+    
+    if (err.type === 'entity.parse.failed') {
+        return res.status(400).json({ 
+            error: 'Invalid JSON format',
+            message: 'The request body contains invalid JSON'
+        });
+    }
+    
+    console.error('Unhandled error:', err);
+    res.status(500).json({ 
+        error: 'Internal server error',
+        message: 'Something went wrong on the server'
+    });
+});
+
+// 404 handler for unmatched routes
+app.use('*', (req, res) => {
+    res.status(404).json({ 
+        error: 'Route not found',
+        message: `The route ${req.originalUrl} does not exist`
+    });
+});
+
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
 
@@ -44,11 +76,6 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile(path.resolve(__dirname, "..", "frontend", "dist", "index.html"));
     });
 }
-
-// 404 handler
-/*app.use((req, res) => {
-    res.status(404).json({ error: 'Route not found' });
-});*/  
 
 // Start server
 server.listen(PORT, () => {

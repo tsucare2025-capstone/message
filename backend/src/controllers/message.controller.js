@@ -1,5 +1,6 @@
 import db from '../lib/db.js';
 import { socketRecieverSocketId, io } from '../lib/socket.js';
+import { validateRouteParams } from '../lib/utils.js';
 
 const getUsersForSideBar = async (req, res) => {
     try{
@@ -19,8 +20,15 @@ const getUsersForSideBar = async (req, res) => {
 
 const getMessages = async (req, res) => {
     try{
-        const {userId:userToChatId} = req.params;
+        // Validate and sanitize route parameters
+        const validatedParams = validateRouteParams(req.params);
+        const {userId:userToChatId} = validatedParams;
         const senderId = req.user.counselorID;
+
+        // Additional validation
+        if (!userToChatId || !senderId) {
+            return res.status(400).json({message: 'Missing required parameters'});
+        }
 
         // Get messages between two users, ordered by timestamp
         const query = 'SELECT * FROM messages WHERE (counselorID = ? AND studentID = ?) OR (counselorID = ? AND studentID = ?) ORDER BY timestamp';
@@ -38,13 +46,20 @@ const getMessages = async (req, res) => {
 const sendMessage = async (req, res) => {
     try{
         const {text} = req.body;
-        const {userId:receiverId} = req.params; // receiverId can be co-counselor or student
+        // Validate and sanitize route parameters
+        const validatedParams = validateRouteParams(req.params);
+        const {userId:receiverId} = validatedParams; // receiverId can be co-counselor or student
         const counselorId = req.user.counselorID;
         
         console.log('Send message request:', { text, receiverId, counselorId });
         
-        if (!text || !receiverId || !counselorId) {
-            return res.status(400).json({message: 'Missing required fields: text, receiverId, or counselorId'});
+        // Enhanced validation
+        if (!text || text.trim().length === 0) {
+            return res.status(400).json({message: 'Message text is required and cannot be empty'});
+        }
+        
+        if (!receiverId || !counselorId) {
+            return res.status(400).json({message: 'Missing required fields: receiverId or counselorId'});
         }
        
         // Insert message without image column
