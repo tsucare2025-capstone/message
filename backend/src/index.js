@@ -37,8 +37,8 @@ app.use(cors({
 app.use((req, res, next) => {
     const url = req.url;
     
-    // Check for malformed route patterns that could cause path-to-regexp errors
-    if (url.includes('//') || url.includes('..') || url.includes('(') || url.includes(')')) {
+    // Only check for the most dangerous patterns that could cause crashes
+    if (url.includes('//') || url.includes('..')) {
         console.error('Malformed route detected:', url);
         return res.status(400).json({
             error: 'Invalid route format',
@@ -102,6 +102,22 @@ if(process.env.NODE_ENV === 'production'){
 // Start server
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+// Global error handlers to prevent crashes
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+    if (err.message && err.message.includes('path-to-regexp')) {
+        console.error('Path-to-regexp error caught at process level');
+    }
+    // Don't exit the process, just log the error
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    if (reason && reason.message && reason.message.includes('path-to-regexp')) {
+        console.error('Path-to-regexp rejection caught at process level');
+    }
 });
 
 export default app;
