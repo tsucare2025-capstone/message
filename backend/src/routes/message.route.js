@@ -15,7 +15,7 @@ const validateUserId = (req, res, next) => {
 };
 
 router.get('/users', protectRoute, getUsersForSideBar);
-router.get('/messages/:userId([0-9]+)', protectRoute, validateUserId, getMessages);
-router.post('/send/:userId([0-9]+)', protectRoute, validateUserId, sendMessage);
+router.get('/messages/:userId', protectRoute, validateUserId, getMessages);
+router.post('/send/:userId', protectRoute, validateUserId, sendMessage);
 
 export default router;

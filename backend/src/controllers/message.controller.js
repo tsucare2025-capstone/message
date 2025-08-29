@@ -1,6 +1,14 @@
 import db from '../lib/db.js';
-import { socketRecieverSocketId, io } from '../lib/socket.js';
 import { validateRouteParams } from '../lib/utils.js';
+
+// These will be imported from the main index.js
+let io, socketRecieverSocketId;
+
+// Function to set socket references (called from index.js)
+const setSocketRefs = (socketIO, socketReceiverFn) => {
+    io = socketIO;
+    socketRecieverSocketId = socketReceiverFn;
+};
 
 const getUsersForSideBar = async (req, res) => {
     try{
@@ -96,4 +104,4 @@ const sendMessage = async (req, res) => {
     }
 }
 
-export {getUsersForSideBar, getMessages, sendMessage};
+export {getUsersForSideBar, getMessages, sendMessage, setSocketRefs};
