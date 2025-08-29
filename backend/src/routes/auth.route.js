@@ -1,6 +1,6 @@
-const express = require('express');
-const { validateRegistration, register, login, logout, checkAuth } = require('../controllers/auth.controller');
-const { protectRoute } = require('../middleware/auth.middleware');
+import express from 'express';
+import { validateRegistration, register, login, logout, checkAuth } from '../controllers/auth.controller.js';
+import { protectRoute } from '../middleware/auth.middleware.js';
 
 //const bcrypt = require('bcrypt');
 //const db = require('./db');
@@ -18,6 +18,6 @@ router.post('/logout', logout);
 router.get("/check-auth", protectRoute, checkAuth);
 
 
-module.exports = router;
+export default router;
 
 

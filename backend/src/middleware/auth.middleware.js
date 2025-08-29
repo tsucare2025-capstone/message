@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const db = require('../lib/db');
+import jwt from 'jsonwebtoken';
+import db from '../lib/db.js';
 
 const protectRoute = async (req, res, next) => {
     try{
@@ -40,4 +40,4 @@ const protectRoute = async (req, res, next) => {
     }
 }
 
-module.exports = { protectRoute };
+export { protectRoute };

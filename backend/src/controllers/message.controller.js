@@ -1,5 +1,5 @@
-const db = require('../lib/db');
-const { socketRecieverSocketId, io } = require('../lib/socket');
+import db from '../lib/db.js';
+import { socketRecieverSocketId, io } from '../lib/socket.js';
 
 const getUsersForSideBar = async (req, res) => {
     try{
@@ -81,4 +81,4 @@ const sendMessage = async (req, res) => {
     }
 }
 
-module.exports = {getUsersForSideBar, getMessages, sendMessage};
+export {getUsersForSideBar, getMessages, sendMessage};

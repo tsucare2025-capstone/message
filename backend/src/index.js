@@ -1,17 +1,14 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const path = require('path');
-
-const authRoutes = require('./routes/auth.route');
-const messageRoutes = require('./routes/message.route');
-const { app, server, io } = require('./lib/socket');
-const db = require('./lib/db');
-const cors = require('cors')({
-    origin: 'http://localhost:5173',
-    credentials: true,
-});
+import authRoutes from './routes/auth.route.js';
+import messageRoutes from './routes/message.route.js';
+import { app, server, io } from './lib/socket.js';
+import db from './lib/db.js';
+import cors from 'cors';
 
 //const studentRoutes = require('../../students');
 
@@ -20,7 +17,8 @@ const cors = require('cors')({
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Middleware for parsing JSON and URL-encoded data
 app.use(express.json());
@@ -29,17 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173'); // Specific origin instead of *
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Credentials', 'true'); // Important for cookies
-    if (req.method === 'OPTIONS') {
-        res.sendStatus(200);
-    } else {
-        next();
-    }
-});
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -65,4 +56,4 @@ server.listen(PORT, () => {
 
 });
 
-module.exports = app;
+export default app;

@@ -1,7 +1,7 @@
-const db = require('../lib/db');
-const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
-const {generateToken} = require('../lib/utils');
+import db from '../lib/db.js';
+import bcrypt from 'bcrypt';
+import nodemailer from 'nodemailer';
+import {generateToken} from '../lib/utils.js';
 
 //input validation for registration
 const validateRegistration = (req, res, next) => {
@@ -232,7 +232,7 @@ const logout = (req, res) => {
     return Buffer.from(`${userId}-${Date.now()}`).toString('base64');
 };*/
 
-module.exports = {
+export {
     validateRegistration,
     register,
     login,
